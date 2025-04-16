@@ -302,8 +302,7 @@ non-nil, it lands us in the `hledger-mode' ."
       (`"incomestatement" (hledger-monthly-incomestatement))
       (`"daily" (hledger-daily-report))
       (`"overall" (hledger-overall-report)
-       (pop-to-buffer hledger-reporting-buffer-name)
-       (delete-other-windows))
+       (pop-to-buffer hledger-reporting-buffer-name))
       (`"balancesheet" (hledger-jdo (concat "balancesheet --end "
                                             (hledger-end-date (current-time)))))
       ;; Allow account completion for
@@ -373,8 +372,7 @@ easily."
         (goto-char here))
       (if bury-bufferp
           (bury-buffer jbuffer)
-        (pop-to-buffer jbuffer)
-        (delete-other-windows))
+        (pop-to-buffer jbuffer))
       (setq header-line-format
             (format "Generated on: %s | %s"
                     (hledger-friendlier-time (current-time))
@@ -427,8 +425,7 @@ Works only for register command."
   "Run hledger register command with PATTERN as argument."
   (interactive "spattern> ")
   (let ((jcmd (concat "register -w 150 " pattern)))
-    (hledger-jdo jcmd)
-    (delete-other-windows)))
+    (hledger-jdo jcmd)))
 
 (defun hledger-daily-report ()
   "Report for today's expenses.
@@ -539,8 +536,7 @@ the reporting buffer."
                  bury-bufferp)
     (when (not bury-bufferp)
       ;; This is because the running report is usually very wide.
-      (pop-to-buffer (hledger-get-perfin-buffer t))
-      (delete-other-windows))
+      (pop-to-buffer (hledger-get-perfin-buffer t)))
     (with-current-buffer (hledger-get-perfin-buffer t)
       ;; Let's sort according to the average column now
       (ignore-errors (while (not (looking-at "=="))
